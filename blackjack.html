@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Blackjack</title>
+        <link rel="stylesheet" href="blackjack.css">
+        <link rel="stylesheet" href="cards.css">
+        <script src="blackjack.js" defer></script>  
+    </head>
+    <body>
+        <h1>Blackjack</h1>
+        <div id="game-container">
+            <h2>Votre main :</h2>
+            <div id="hand-container">
+                <template id="card-template">
+                    <div class="card card-front">
+                        <div class="top-left"></div>
+                        <div class="center"></div>
+                        <div class="bottom-right"></div>
+                    </div>
+                </template>
+            </div>
+            <h3>Total : <span id="total-value">0</span></h3>
+            <div id="buttons-container">
+                <button id="draw-card">Tirer une carte</button>
+                <button id="stand">Rester</button>
+            </div>
+            <div id="message-container">
+
+            </div>
+        </div>
+    </body>
+</html>
