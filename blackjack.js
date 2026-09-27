@@ -37,7 +37,11 @@ function checkPlayerState(value) {
     } else if (value === 21) {
         document.getElementById("draw-card").disabled = true;
         document.getElementById("stand").disabled = true;
-        document.getElementById("message-container").textContent= "Vous avez atteint 21. Vous avez gagné !";
+        if (hand.length === 2) {
+            document.getElementById("message-container").textContent= "Blackjack ! Vous avez gagné !";
+        } else {
+            document.getElementById("message-container").textContent= "Vous avez atteint 21. Vous avez gagné !";
+        }
     } else {
         console.log(value);
     }
@@ -73,7 +77,6 @@ function renderCardInHand(card, containerId) {
 }
 
 function isCardAvailable(color, value) {
-    const searchedCard = {color, value};
     return !hand.some(card => card.color === color && card.value === value);
 }
 
@@ -93,3 +96,8 @@ function drawCard() {
 
 drawButton.addEventListener('click', drawCard);
 standButton.addEventListener('click', standOnValue);
+
+document.addEventListener('DOMContentLoaded', () => {
+  drawCard();
+  drawCard();
+});
