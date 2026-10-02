@@ -7,26 +7,64 @@
         <script src="blackjack.js" defer></script>  
     </head>
     <body>
+        <div id="balance-container">
+            Solde : <span id="balance">1000</span>
+            <br>
+            Miser : <input type="number" id="bet-amount" value="100" min="1" max="1000">
+            <button id="place-bet">Placer la mise</button>
+            <br>
+            Votre mise : <span id="current-bet">0</span>
+            <br>
+            <button id="reset-game">Recommencer le jeu</button>
+        </div>
+
+        
         <h1>Blackjack</h1>
+        
         <div id="game-container">
-            <h2>Votre main :</h2>
-            <div id="hand-container">
-                <template id="card-template">
-                    <div class="card card-front">
-                        <div class="top-left"></div>
-                        <div class="center"></div>
-                        <div class="bottom-right"></div>
-                    </div>
-                </template>
+            
+            <!-- Zone du Croupier -->
+            <div class="table-zone dealer-zone">
+                <div class="zone-header">
+                    <h2>Croupier</h2>
+                    <div class="score-badge">Total : <span id="dealer-total-value"></span></div>
+                </div>
+                <div id="dealer-hand-container">
+                    <template id="dealer-card-template">
+                        <div class="card card-back">
+                            <div class="top-left"></div>
+                            <div class="center"></div>
+                            <div class="bottom-right"></div>
+                        </div>
+                    </template>
+                </div>
             </div>
-            <h3>Total : <span id="total-value">0</span></h3>
+
+            <!-- Zone du Joueur -->
+            <div class="table-zone player-zone">
+                <div class="zone-header">
+                    <h2>Votre main</h2>
+                    <div class="score-badge">Total : <span id="total-value">0</span></div>
+                </div>
+                <div id="hand-container">
+                    <template id="card-template">
+                        <div class="card card-front">
+                            <div class="top-left"></div>
+                            <div class="center"></div>
+                            <div class="bottom-right"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Contrôles et Messages -->
             <div id="buttons-container">
                 <button id="draw-card">Tirer une carte</button>
                 <button id="stand">Rester</button>
             </div>
-            <div id="message-container">
-
-            </div>
+            
+            <div id="message-container"></div>
+            
         </div>
     </body>
 </html>
