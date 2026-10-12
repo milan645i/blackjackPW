@@ -100,17 +100,23 @@ function endRound() {
 }
 
 function startRound() {
-    document.getElementById("draw-card").disabled = false;
-    document.getElementById("stand").disabled = false;
+    document.getElementById("draw-card").disabled = true;
+    document.getElementById("stand").disabled = true;
     document.getElementById("place-bet").disabled = true;
-    drawCard('hand-container');
-    drawCard('hand-container');
-    drawCard('dealer-hand-container');
-    drawCard('dealer-hand-container');
+    drawCard('hand-container', false);
+    drawCard('hand-container', false);
+    drawCard('dealer-hand-container', false);
+    drawCard('dealer-hand-container', false);
     setTimeout(() => {
         flipCard(document.getElementById('dealer-hand-container').querySelector('.card'));
         const dealerHandValue = processHandValues(dealerHand.slice(0, -1));
         document.getElementById('dealer-total-value').textContent = dealerHandValue;
+        const playerValue = processHandValues(hand);
+        checkPlayerState(playerValue);
+        if (playerValue < 21) {
+            document.getElementById("draw-card").disabled = false;
+            document.getElementById("stand").disabled = false;
+        }
     }, 250);
 }
 
@@ -143,7 +149,7 @@ function isCardAvailable(color, value) {
     return !(hand.some(card => card.color === color && card.value === value)|| dealerHand.some(card => card.color === color && card.value === value));
 }
 
-function drawCard(containerId) {
+function drawCard(containerId, checkState = true) {
     const color = colors[Math.floor(Math.random() * colors.length)];
     const value = values[Math.floor(Math.random() * values.length)];
     if(!isCardAvailable(color, value)) {
@@ -155,7 +161,9 @@ function drawCard(containerId) {
             hand.push({ color, value });
         }
         renderCardInHand({ color, value }, containerId);
-        checkPlayerState(processHandValues(hand));
+        if (containerId !== 'dealer-hand-container' && checkState) {
+            checkPlayerState(processHandValues(hand));
+        }
     }
 }
 
